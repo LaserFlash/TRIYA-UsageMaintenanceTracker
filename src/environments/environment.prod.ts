@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  version: '0.0.0',
   firebase: {
     apiKey: 'AIzaSyDAhImfg1rxJWb7ir___HnDlP5Ov4lULfM',
     authDomain: 'triya-usagemaintenancetracker.firebaseapp.com',
