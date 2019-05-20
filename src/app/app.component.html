@@ -23,7 +23,6 @@
   <mat-sidenav class="sidenav noPrint" #sidenav mode="push" fixedInViewport="true">
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="WYST Logo" />
     <mat-nav-list>
-
       <hr />
       <h3 matSubheader>Tasks</h3>
       <a mat-list-item *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" (click)="sidenav.close()">
