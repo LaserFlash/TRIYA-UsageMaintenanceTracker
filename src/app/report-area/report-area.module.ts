@@ -33,6 +33,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -71,6 +72,7 @@ import { Cloudinary } from 'cloudinary-core';
     MatSnackBarModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     ChartsModule,
     ReactiveFormsModule,
     FormsModule,

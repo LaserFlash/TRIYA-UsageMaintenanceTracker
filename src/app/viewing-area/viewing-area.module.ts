@@ -33,9 +33,12 @@ import { MatDatepickerModule } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatMomentDateModule,
     MatInputModule,
     MatButtonModule,
+    MatExpansionModule,
     ChartsModule,
+    ScrollingModule
   ],
   providers: [
     BoatBreakageService,

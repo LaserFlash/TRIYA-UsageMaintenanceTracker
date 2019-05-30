@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SignupComponent } from './core/auth/signup/signup.component';
-import { AuthenticationService } from './core/auth/authentication.service';
 
 import { MatSidenavModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
@@ -20,10 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
-
-import { ThemeTrackerService } from './theme-tracker.service';
+import { SharedServicesModule } from './shared-services.module';
 
 
 import { environment } from '../environments/environment';
@@ -81,11 +78,10 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatIconModule,
     MatCardModule,
     MatTooltipModule,
-    MatToolbarModule
+    MatToolbarModule,
+    SharedServicesModule.forRoot()
   ],
   providers: [
-    AuthenticationService,
-    ThemeTrackerService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
   ],
   bootstrap: [AppComponent]
