@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { DateAdapter } from '@angular/material';
+import { DateAdapter } from '@angular/material/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractControl } from '@angular/forms';
 
-import { MatSnackBar } from '@angular/material';
-import { MatStepper } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
 
 import { WindTypes, WindDirection, WaterState } from '../../../core/constants/menu-names/menuNames';
 import { WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../../core/constants/menu-names/nameConversion';
@@ -21,7 +21,7 @@ const NUMBER_REGEX = /[0-9]+/;
 })
 export class ReportUsageComponent {
 
-  @ViewChild('stepper') stepper: MatStepper;
+  @ViewChild('stepper', { static: true }) stepper: MatStepper;
 
   title = 'Report Boat Usage';
   maxDate = new Date();

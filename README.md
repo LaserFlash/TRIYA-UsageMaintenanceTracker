@@ -3,7 +3,7 @@
 # TRIYA UsageMaintenanceTracker
 
 Source code for the web app hosted at
-https://TRIYA-usagemaintenancetracker.firebaseapp.com/ Built using Angular6 and
+https://TRIYA-usagemaintenancetracker.firebaseapp.com/ Built using Angular 8 and Material2
 Records and provides information relating to boats and safety for TRIYA.
 
 ## Project Structure / Architecture
