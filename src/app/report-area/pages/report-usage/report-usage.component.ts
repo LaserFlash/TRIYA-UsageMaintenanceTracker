@@ -192,8 +192,8 @@ export class ReportUsageComponent {
 
       const usage = new UsageInfo(
         this.usageForm.get('formArray').get([0]).get('boatID').value,
-        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('startTime').value),
-        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('endTime').value),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value.toDate(), this.usageForm.get('formArray').get([1]).get('startTime').value),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value.toDate(), this.usageForm.get('formArray').get([1]).get('endTime').value),
         null,
         this.usageForm.get('formArray').get([2]).get('driver').value,
         crew,
@@ -228,12 +228,10 @@ export class ReportUsageComponent {
   * Given a time and a date combine them together
   **/
   private buildTimeDate(date: Date, timeString: string) {
-    console.log(timeString);
     const time = timeString.split(':');
     const hour = parseInt(time[0]);
     const minute = parseInt(time[1]);
     const timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
-    console.log(timeDate);
     return timeDate;
   }
 
