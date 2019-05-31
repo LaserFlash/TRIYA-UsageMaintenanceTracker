@@ -14,8 +14,6 @@ import { ViewIssuesComponent } from './pages/view-issues/view-issues.component';
 import { ViewFixedComponent } from './pages/view-fixed/view-fixed.component';
 
 /* Custom Components */
-import { LastUsesComponent } from './pages/view-usage/components/last-uses/last-uses.component';
-import { UsageGraphsComponent } from './pages/view-usage/components/usage-graphs/usage-graphs.component';
 import { BreakageCardModule } from '../ui/breakage-card/breakage-card.module';
 import { UsageCardComponent } from './pages/view-usage/components/usage-card/usage-card.component';
 import { SortFilterBarComponent } from '../ui/sort-filter-bar/sort-filter-bar.component';
@@ -46,8 +44,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ViewUsageComponent,
     ViewIssuesComponent,
     ViewFixedComponent,
-    LastUsesComponent,
-    UsageGraphsComponent,
     SortFilterBarComponent,
     UsageCardComponent
   ],

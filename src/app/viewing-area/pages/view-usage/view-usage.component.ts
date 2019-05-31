@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { UsageInfo } from '../../../core/objects/usageInfo';
-import { KnownBoatsService } from '../../../core/constants/known-boats/known-boats.service';
 import { BoatUsageService } from './providers/boat-usage.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
@@ -12,29 +11,27 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   styleUrls: ['./view-usage.component.css']
 })
 export class ViewUsageComponent implements OnInit {
-  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  @ViewChild(CdkVirtualScrollViewport, { static: true })
   viewport: CdkVirtualScrollViewport;
 
-  boats;
   infiniteUsages;
   constructor(
     public usageService: BoatUsageService,
-    private BOATS: KnownBoatsService
   ) { }
 
-  ngOnInit() {
-    this.BOATS.boatInformation.subscribe(boats => {
-      this.boats = boats;
-    });
-  }
+  ngOnInit() {}
 
 
-  geNextBatch(e, offset) {
+  getNextBatch(e, offset) {
+    /* If Viewport not their don't get batch */
+    if (!this.viewport){
+      return;
+    }
     offset = !offset ? new Date() : offset.endTime;
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
 
-    this.usageService.nextBatch(e, offset, end, total);
+    return this.usageService.nextBatch(e, offset, end, total);
   }
 
 
