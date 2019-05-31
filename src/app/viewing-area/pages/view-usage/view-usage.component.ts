@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { UsageInfo } from '../../../core/objects/usageInfo'
+import { UsageInfo } from '../../../core/objects/usageInfo';
 import { KnownBoatsService } from '../../../core/constants/known-boats/known-boats.service';
-import { BoatUsageService } from '../../shared/boat-usage.service';
+import { BoatUsageService } from './providers/boat-usage.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 
@@ -30,7 +30,7 @@ export class ViewUsageComponent implements OnInit {
 
 
   geNextBatch(e, offset) {
-    offset = offset == undefined ? new Date() : offset.endTime;
+    offset = !offset ? new Date() : offset.endTime;
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
 

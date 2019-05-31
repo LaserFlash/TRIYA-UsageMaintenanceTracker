@@ -3,8 +3,8 @@ import { DateAdapter } from '@angular/material';
 
 import { BreakageInfo } from '../../core/objects/breakageInfo';
 
-import { PartsRiB, Parts420 } from '../../core/constants/menu-names/menuNames'
-import { KnownBoatsService } from '../../core/constants/known-boats/known-boats.service'
+import { PartsRiB, Parts420 } from '../../core/constants/menu-names/menuNames';
+import { KnownBoatsService } from '../../core/constants/known-boats/known-boats.service';
 
 @Component({
   selector: 'sort-filter-bar',
@@ -19,7 +19,14 @@ export class SortFilterBarComponent implements OnInit {
   @ViewChild('startPicker') startPicker: ElementRef;
   @ViewChild('endPicker') endPicker: ElementRef;
 
-  sortList: string[] = ['Newest', 'Oldest', 'Most Important', 'Least Important', 'Boat'];
+  sortList: string[] = [
+    'Newest',
+    'Oldest',
+    'Most Important',
+    'Least Important',
+    'Boat'
+  ];
+
   filterList;
 
   partfilterList: string[] = PartsRiB.concat(Parts420);
@@ -41,7 +48,7 @@ export class SortFilterBarComponent implements OnInit {
     this.BOATS.boatInformation.subscribe(boats => {
       this.filterList = boats;
     });
-    this.resetFilter()
+    this.resetFilter();
   }
 
   clearDates() {
@@ -73,7 +80,13 @@ export class SortFilterBarComponent implements OnInit {
   private filter() {
     let filtered;
     /* Apply filters taking into account any boat filters also applied */
-    filtered = this.original.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item)).filter(item => this.timeFilter(item));
+    filtered =
+      this.original.filter(
+        (item) => this.partFilter(item)).filter(
+          (item) => this.boatFilter(item)
+        ).filter(
+          (item) => this.timeFilter(item)
+        );
 
     this.breakages.splice(0, this.breakages.length);
     for (let i = 0; i < filtered.length; i++) {
@@ -86,7 +99,7 @@ export class SortFilterBarComponent implements OnInit {
   private addFilter(key: string) {
     const index = this.appliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index != -1) {
+    if (index !== -1) {
       this.appliedFilters.splice(index, 1);
     } else {
       this.appliedFilters.push(key);  // add filter
@@ -99,12 +112,12 @@ export class SortFilterBarComponent implements OnInit {
   private addPartFilter(key: string) {
     const index = this.partappliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index != -1) {
+    if (index !== -1) {
       this.partappliedFilters.splice(index, 1);
     } else {
       this.partappliedFilters.push(key);
     }
-    this.filter()
+    this.filter();
   }
 
   /** Get the data that meets the filter */
@@ -150,17 +163,11 @@ export class SortFilterBarComponent implements OnInit {
     const sort = this.sortBy;
     if (sort === 'Newest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
-          return b.timestampFixed.toDate().getTime() - a.timestampFixed.toDate().getTime();
-        }
-        return b.timestamp.toDate().getTime() - a.timestamp.toDate().getTime();
+        return this.sortOrder(b, a);
       });
     } else if (sort === 'Oldest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
-          return a.timestampFixed.toDate().getTime() - b.timestampFixed.toDate().getTime();
-        }
-        return a.timestamp.toDate().getTime() - b.timestamp.toDate().getTime();
+        return this.sortOrder(a, b);
       });
     } else if (sort === 'Boat') {
       this.breakages.sort((a, b) => a.boatID - b.boatID);
@@ -172,4 +179,16 @@ export class SortFilterBarComponent implements OnInit {
       }
     }
   }
+
+  private sortOrder(a, b) {
+    if (a.timestampFixed && b.timestampFixed) {
+      return a.timestampFixed.toDate().getTime() - b.timestampFixed.toDate().getTime();
+    }
+    return a.timestamp.toDate().getTime() - b.timestamp.toDate().getTime();
+  }
+
+  private getBoatName(v) {
+    return this.BOATS.getBoatName(v);
+  }
+
 }

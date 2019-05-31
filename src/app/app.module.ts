@@ -20,16 +20,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-import { SharedServicesModule } from './shared-services.module';
-
+import { SharedServicesModule } from './core/shared-services.module';
 
 import { environment } from '../environments/environment';
 
-import { CookieModule } from 'ngx-cookie';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from './hammer.config'
+import { HammerConfig } from './hammer.config';
 import 'hammerjs';
 
 import { AngularFireModule } from '@angular/fire';
@@ -52,7 +50,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   autoUpgradeAnonymousUsers: true
 };
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +66,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
-    CookieModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     MatSidenavModule,
     MatTabsModule,

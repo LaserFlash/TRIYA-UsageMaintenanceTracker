@@ -1,4 +1,4 @@
-import { Levels, WindTypes, WindDirection, WaterState } from './menuNames'
+import { Levels, WindTypes, WindDirection, WaterState } from './menuNames';
 
 export class ImportanceConversionHelper {
   public static numberFromImportance(s) {

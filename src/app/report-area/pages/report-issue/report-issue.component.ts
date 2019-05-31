@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import { ContactValidator } from '../../shared/validators/CustomValidators';
 import { BreakageInfo } from '../../../core/objects/breakageInfo';
-import { BoatBreakageService } from '../../shared/boat-breakage.service';
+import { BoatBreakageService } from '../../shared/providers/boat-breakage.service';
 import { KnownBoatsService } from '../../../core/constants/known-boats/known-boats.service';
 
-import { BoatID } from '../../../core/objects/boat'
+import { BoatID } from '../../../core/objects/boat';
 import { Levels, Parts420, PartsRiB } from '../../../core/constants/menu-names/menuNames';
 import { ImportanceConversionHelper } from '../../../core/constants/menu-names/nameConversion';
 
@@ -92,7 +92,7 @@ export class ReportIssueComponent implements OnInit {
 
   ngOnInit() {
     this.BOATS.boatInformation.subscribe( boats => {
-      this.boats = boats.filter(boat =>{
+      this.boats = boats.filter(boat => {
         return boat.selectable;
       });
     });
@@ -131,11 +131,11 @@ export class ReportIssueComponent implements OnInit {
       return { fileItem, form };
     };
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
-      this.imageLoaded = true;
-      const j = JSON.parse(response);
-      this.imageID = j['public_id'];
-      this.breakage[0].imageID = this.imageID;
-    };
+       this.imageLoaded = true;
+       const j = JSON.parse(response);
+       this.imageID = j['public_id'];
+       this.breakage[0].imageID = this.imageID;
+      };
     this.uploader.onProgressItem = (fileItem: any, progress: any) => { this.imageLoaded = false; };
   }
 

@@ -7,10 +7,10 @@ import { MatStepper } from '@angular/material';
 
 import { WindTypes, WindDirection, WaterState } from '../../../core/constants/menu-names/menuNames';
 import { WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../../core/constants/menu-names/nameConversion';
-import { BoatUsageService } from '../../shared/boat-usage.service'
-import { KnownBoatsService } from '../../../core/constants/known-boats/known-boats.service'
-import { UsageInfo } from '../../../core/objects/usageInfo'
-import { BoatID } from '../../../core/objects/boat'
+import { BoatUsageService } from '../../shared/providers/boat-usage.service';
+import { KnownBoatsService } from '../../../core/constants/known-boats/known-boats.service';
+import { UsageInfo } from '../../../core/objects/usageInfo';
+import { BoatID } from '../../../core/objects/boat';
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -84,15 +84,15 @@ export class ReportUsageComponent {
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private BOATS: KnownBoatsService
-  ) {
-    this.dateAdapter.setLocale('en-nz');
-    this.createForm();
-    BOATS.boatInformation.subscribe((boats) => {
-      this.boats = boats.filter((boat) => {
-        return boat.selectable;
+    ) {
+      this.dateAdapter.setLocale('en-nz');
+      this.createForm();
+      BOATS.boatInformation.subscribe((boats) => {
+        this.boats = boats.filter((boat) => {
+          return boat.selectable;
+        });
       });
-    });
-  }
+    }
 
   /** Build the form */
   private createForm() {
