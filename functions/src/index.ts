@@ -26,7 +26,9 @@ exports.calculateDuration = functions.firestore
     }
 
     //Calculate duration
-    const duration = (data.endTime - data.startTime) / (3600000);
+    const duration = (data.endTime.seconds - data.startTime.seconds) / (3600);
+    console.log("End Time: " + data.endTime.seconds);
+    console.log("Start Time: " + data.startTime.seconds);
     console.log("The duration is: ", duration);
     // Then return a promise of a set operation to update the count
     return change.after.ref.set({
