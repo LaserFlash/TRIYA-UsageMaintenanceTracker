@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UsageInfo } from '../../../../core/objects/usageInfo';
+import { UsageInfo, UsageInfoID } from '../../../../core/objects/usageInfo';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { KnownBoatsService } from '../../../../core/constants/known-boats/known-boats.service';
-import { UsageInfo, UsageInfoID } from '../.../../../core/objects/usageInfo';
+
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
