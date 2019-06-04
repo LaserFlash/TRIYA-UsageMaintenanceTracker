@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 admin.initializeApp();
+const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 
 // Listen for updates to any `boatUsage` document.
@@ -26,13 +27,30 @@ exports.calculateDuration = functions.firestore
     }
 
     //Calculate duration
-    const duration = (data.endTime - data.startTime) / (3600000);
+    const duration = (data.endTime.seconds - data.startTime.seconds) / (3600);
+    console.log("End Time: " + data.endTime.seconds);
+    console.log("Start Time: " + data.startTime.seconds);
     console.log("The duration is: ", duration);
     // Then return a promise of a set operation to update the count
     return change.after.ref.set({
       duration: duration
     }, { merge: true });
 
+  });
+
+exports.countUsageRecords = functions.firestore
+  .document('boatUsage/{id}')
+  .onWrite((change, context) => {
+    if (!change.before.exists) {
+      // New document Created : add one to count
+      return admin.firestore().doc('stats/totalUsageItems').update({ numberOfDocs: FieldValue.increment(1) });
+    } else if (change.before.exists && change.after.exists) {
+      // Updating existing document : Do nothing
+    } else if (!change.after.exists) {
+      // Deleting document : subtract one from count
+      return admin.firestore().doc('stats/totalUsageItems').update({ numberOfDocs: FieldValue.increment(-1) });
+    }
+    return;
   });
 
 exports.createProfile = functions.auth.user()
