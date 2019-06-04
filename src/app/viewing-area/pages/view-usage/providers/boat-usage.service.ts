@@ -17,14 +17,14 @@ export class BoatUsageService {
 
   public pageIndex = 0;
   public currentSelectedUsages: BehaviorSubject<UsageInfoID[]> = new BehaviorSubject(null);
-  private previousUsageSet: UsageInfoID[] = [];
+  private previousUsageSet: any[] = [];
   public batch_size: number = 20;
 
   totalNumberOfUsages: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(private db: AngularFirestore, BOATS: KnownBoatsService) {
     this.db.doc('/stats/totalUsageItems').valueChanges().subscribe(numRecords => {
-      this.totalNumberOfUsages.next(numRecords.numberOfDocs);
+      this.totalNumberOfUsages.next((numRecords as any).numberOfDocs);
     })
     this.getBatch().subscribe(val => { this.currentSelectedUsages.next(val) });
   }
